@@ -1,6 +1,8 @@
 package src;
 import java.sql.*;
 
+import javax.naming.spi.DirStateFactory.Result;
+
 
 public class EasyDatabase {
     private static final String JDBC_URL = "jdbc:mysql://stusql.dcs.shef.ac.uk/team068";
@@ -9,14 +11,12 @@ public class EasyDatabase {
 
     Statement statement = null;
     Connection con = null;
+    ResultSet resultSet = null;
 
-
-
-    public void connect() {
+    public EasyDatabase() {
         try {
             con = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
             statement = con.createStatement();
-            // execute your SQL statements here
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -27,6 +27,39 @@ public class EasyDatabase {
             statement.close();
             con.close();
         } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void executeUpdate(String Query){
+        try{statement.executeUpdate(Query);}
+        catch(SQLException e){e.printStackTrace();}
+    }
+
+    public void executeQuery(String Query){
+        try{resultSet = statement.executeQuery(Query);}
+        catch(SQLException e){e.printStackTrace();}
+    }
+
+    public void printQuery(){
+        try{
+            ResultSetMetaData metaData = resultSet.getMetaData();
+            int columnCount = metaData.getColumnCount();
+            for (int i = 1; i <= columnCount; i++) {
+                System.out.print(metaData.getColumnName(i) + "\t");
+            }
+            System.out.println();
+
+            
+            // Print records
+            while (resultSet.next()) {
+                for (int i = 1; i <= columnCount; i++) {
+                    System.out.print(resultSet.getString(i) + "\t");
+                }
+                System.out.println();
+            }
+        } 
+        catch(SQLException e){
             e.printStackTrace();
         }
     }
