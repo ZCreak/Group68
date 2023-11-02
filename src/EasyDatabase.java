@@ -1,9 +1,6 @@
 package src;
 import java.sql.*;
 
-import javax.naming.spi.DirStateFactory.Result;
-
-
 public class EasyDatabase {
     private static final String JDBC_URL = "jdbc:mysql://stusql.dcs.shef.ac.uk/team068";
     private static final String USERNAME = "team068";
