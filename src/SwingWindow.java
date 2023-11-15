@@ -13,6 +13,15 @@ public class SwingWindow extends JFrame {
         setLocation(screenSize.width/4, screenSize.height/4);
         System.out.println(screenSize.width);
 
+        JMenuBar menubar = new JMenuBar();
+        JMenu menu = new JMenu("Menu");
+        JMenuItem register = new JMenuItem("Register");
+        JMenuItem login = new JMenuItem("Login");
+        menu.add(register);
+        menu.add(login);
+        menubar.add(menu);
+        this.setJMenuBar(menubar);
+
         /* 
          * Notes - Here is where we can define JButtons, JTextFields, JComboBoxes, JCheckBoxes, JPasswordFields, JRadioButtons, JMenu stuff...
          * I've set up a grid layout for now but idk what we're gonna use so we can discuss that in our next meeting
