@@ -18,7 +18,7 @@ public class Product {
         DCC_Sound
     };
 
-    private int productID = 0;
+    private String productID = null;
     private String productName = null;
     private String productBrand = null;
     private double productPrice = 0;
@@ -27,7 +27,7 @@ public class Product {
     private DCCCode dCCCode = null;
     private int numberInStock = 0;
 
-    public int getID() {
+    public String getID() {
         return productID;
     }
 
@@ -87,7 +87,7 @@ public class Product {
         this.numberInStock = number;
     }
 
-    public Product(int id) throws SQLException{
+    public Product(String id) throws SQLException{
         EasyDatabase db = new EasyDatabase();
         db.executeQuery("SELECT * FROM ProductTable WHERE productID={id}");
         this.productID = id;
@@ -129,6 +129,7 @@ public class Product {
         this.numberInStock = db.resultSet.getInt(7);
     }
 
+    /**
     public Product(String name) throws SQLException{
         EasyDatabase db = new EasyDatabase();
         db.executeQuery("SELECT * FROM ProductTable WHERE productID={id}");
@@ -169,9 +170,9 @@ public class Product {
                 break;
         }
         this.numberInStock = db.resultSet.getInt(7);
-    }
+    }**/
 
-    public Product(int id, String name, String brand, double price, Gauge gauge, String era, DCCCode dCCCode, int stock){
+    public Product(String id, String name, String brand, double price, Gauge gauge, String era, DCCCode dCCCode, int stock){
         this.productID = id;
         this.productName = name;
         this.productBrand = brand;
